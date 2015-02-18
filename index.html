@@ -2,31 +2,54 @@
 <html lang="ja">
 <head>
 	<meta charset="utf-8">
-	<title>Youtube Juke Box</title>
+	<title>DJ on Youtube</title>
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-
-<h1>Youtube Juke Box</h1>
+<h1>DJ on Youtube</h1>
 <hr>
-<div id="player"></div>
+<div class="row">
+	<div class="col-md-6">
+		<h2>Turntable 1</h2>
+		<div id="player1"></div>
+	</div>
+	<div class="col-md-6">
+		<h2>Turntable 2</h2>
+		<div id="player2"></div>
+	</div>
+</div>
 <hr>
-<form id="search" onsubmit="return false;">
-	<input type="text" id="q">
-	<input type="submit" value="Search!">
+<form class="form-inline" id="search" onsubmit="return false;">
+	<div class="form-group">
+		<input type="text" class="form-control" id="q">
+		<input class="btn btn-primary" type="submit" value="Search!">
+	</div>
 </form>
 <hr>
-<button id="prev">&lt;&lt; Prev</button>
-<button id="play">Play</button>
-<button id="pause">Pause</button>
-<button id="next">Next &gt;&gt;</button>
+<ul id="playlist">
+</ul>
+<hr>
+	<!-- <div class="col-md-3 col-md-offset-1" id="radioButtons">
+		<label class="radio-inline">
+			<input type="radio" name="TurntableOptions" id="radio1" value="true"> <strong>Assign to Turntable 1</strong>
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="TurntableOptions" id="radio2" value="true"> <strong>Assign to Turntable 2</strong>
+		</label>
+	</div> -->
+		<button class="btn btn-default" id="prev">&lt;&lt; Prev</button>
+		<button class="btn btn-default" id="play">Play</button>
+		<button class="btn btn-default" id="pause">Pause</button>
+		<button class="btn btn-default" id="next">Next &gt;&gt;</button>
 <hr>
 <ul id="list">
-	
 </ul>
 
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="script.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>

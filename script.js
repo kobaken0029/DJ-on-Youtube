@@ -1,4 +1,5 @@
-var player;
+var player1;
+var player2;
 
 $(function() {
 
@@ -21,25 +22,50 @@ $(function() {
 				var item = rs.items[i];
 				$('#list').append(
 					$('<li class="movie">').append(
-						$('<img>').attr('src', item['snippet']['thumbnails']['default']['url'])
-					).data('video-id', item['id']['videoId'])
+						$('<img>').attr({
+							'src': item['snippet']['thumbnails']['default']['url'],
+							'class': 'img-thumbnail'
+						})
+					).data('video-id', item['id']['videoId']).append(
+						$('<li>').append(
+							$('<p>').append(item['snippet']['title'])
+						)
+					)
 				);
 			};
 		}, "json")
 	});
 
-	$(document).on('click', 'li.movie', function(){
-		$(this).toggleClass('on');
+
+
+	$(document).on('click', '#list li', function(){
+		var moviePosition = $('#list .assigned1').index(this);
+
+		if ($('#radio1')[0].checked) {
+			$(this).removeClass('assigned2');
+			$(this).toggleClass('assigned1');	
+		}
+		else {
+			$(this).removeClass('assigned2');
+			$(this).toggleClass('assigned1');	
+		}
+
+		if ($(this).hasClass('assigned1')) {
+			$('#playlist').append($(this).clone());
+		}
+		else {
+			$('#playlist .assigned1:eq('+moviePosition+')').remove();
+		}
 	});
 
 	var currentIndex = 0;
 
 	function play() {
-		var videoId = $('li.movie.on:eq('+currentIndex+')').data('video-id');
+		var videoId = $('#playlist .assigned1:eq('+currentIndex+')').data('video-id');
 
-		player.loadVideoById(videoId);
+		player1.cueVideoById(videoId);
 		$('li.movie').removeClass('playing');
-		$('li.movie.on:eq('+currentIndex+')').addClass('playing');
+		$('li.movie.assigned1:eq('+currentIndex+')').addClass('playing');
 	}
 
 	$('#play').click(function(){
@@ -47,11 +73,11 @@ $(function() {
 	});
 
 	$('#pause').click(function() {
-		player.pauseVideo();
+		player1.pauseVideo();
 	});
 
 	$('#next').click(function() {
-		if (currentIndex == $('li.movie.on').length - 1) {
+		if (currentIndex == $('li.movie.assigned1').length - 1) {
 			currentIndex = 0;
 		}
 		else {
@@ -61,16 +87,26 @@ $(function() {
 	});
 
 	$('#prev').click(function() {
-		if(currentIndex == 0) {
-			return false;
-		}
 		currentIndex--;
+		if(currentIndex == 0) {
+			currentIndex = $('li.movie.assigned1').length - 1;
+		}
 		play();
 	});
 });
 
 function onYouTubeIframeAPIReady() {
-	player = new YT.Player('player', {
+	player1 = new YT.Player('player1', {
+			height: '390',
+			width: '640',
+			events: {
+				onStateChange: onPlayerStateChange
+			}
+		}
+
+	)
+
+	player2 = new YT.Player('player2', {
 			height: '390',
 			width: '640',
 			events: {

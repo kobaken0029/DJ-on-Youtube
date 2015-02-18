@@ -2,11 +2,6 @@ body {
 	text-align: center;
 }
 
-#player {
-	width: 640px;
-	height: 360px;
-}
-
 ul {
 	list-style-type: none;
 	padding: 0;
@@ -15,14 +10,21 @@ ul {
 
 li.movie {
 	float: left;
-	width: 120px;
 	padding: 10px;
 }
 
-li.movie.on {
+li.movie.assigned1 {
 	background-color: #afa;
 }
 
+li.movie.assigned2 {
+	background-color: pink;
+}
+
 li.movie.playing {
-	background-color: #faa;
+	background-color: deeppink;
+}
+
+#radioButtons {
+	margin-top: 10px
 }
