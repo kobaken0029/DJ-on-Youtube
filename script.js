@@ -26,7 +26,7 @@ $(function() {
 							'src': item['snippet']['thumbnails']['default']['url'],
 							'class': 'img-thumbnail'
 						})
-					).data('video-id', item['id']['videoId']).append(
+					).attr('data-video-id', item['id']['videoId']).append(
 						$('<li>').append(
 							$('<p>').append(item['snippet']['title'])
 						)
@@ -39,33 +39,47 @@ $(function() {
 
 
 	$(document).on('click', '#list li', function(){
-		var moviePosition = $('#list .assigned1').index(this);
+		var videoId = $(this).data('video-id');
+		$(this).toggleClass('on');
 
-		if ($('#radio1')[0].checked) {
-			$(this).removeClass('assigned2');
-			$(this).toggleClass('assigned1');	
+		if ($(this).hasClass('on')) {
+			$('#playlist').append(
+				$(this).clone().append($('<button>').attr('class', 'btn btn-sm btn-default assign1-button').append(
+					'<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <strong>1</strong>')
+				).append($('<button>').attr('class', 'btn btn-sm btn-default assign2-button').append(
+					'<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <strong>2</strong>')
+				)
+			);
 		}
 		else {
-			$(this).removeClass('assigned2');
-			$(this).toggleClass('assigned1');	
+			$('#playlist [data-video-id = '+videoId+']').remove();
 		}
+	});
 
-		if ($(this).hasClass('assigned1')) {
-			$('#playlist').append($(this).clone());
-		}
-		else {
-			$('#playlist .assigned1:eq('+moviePosition+')').remove();
-		}
+	// $(document).on('click', '#playlist li', function(){
+	// 	var videoId = $(this).data('video-id');
+	// 	$('#list [data-video-id = '+videoId+']').removeClass('on');
+	// 	$(this).remove();
+	// });
+
+	$(document).on('click', '#playlist .assign1-button', function(){
+		var videoId = $($(this).parent()).data('video-id');
+		player1.cueVideoById(videoId);
+	});
+
+	$(document).on('click', '#playlist .assign2-button', function(){
+		var videoId = $($(this).parent()).data('video-id');
+		player2.cueVideoById(videoId);
 	});
 
 	var currentIndex = 0;
 
 	function play() {
-		var videoId = $('#playlist .assigned1:eq('+currentIndex+')').data('video-id');
+		var videoId = $('#playlist .on:eq('+currentIndex+')').data('video-id');
 
 		player1.cueVideoById(videoId);
 		$('li.movie').removeClass('playing');
-		$('li.movie.assigned1:eq('+currentIndex+')').addClass('playing');
+		$('#playlist .on:eq('+currentIndex+')').addClass('playing');
 	}
 
 	$('#play').click(function(){
@@ -77,7 +91,7 @@ $(function() {
 	});
 
 	$('#next').click(function() {
-		if (currentIndex == $('li.movie.assigned1').length - 1) {
+		if (currentIndex == $('#playlist .on').length - 1) {
 			currentIndex = 0;
 		}
 		else {
@@ -89,7 +103,7 @@ $(function() {
 	$('#prev').click(function() {
 		currentIndex--;
 		if(currentIndex == 0) {
-			currentIndex = $('li.movie.assigned1').length - 1;
+			currentIndex = $('#playlist .on').length - 1;
 		}
 		play();
 	});
@@ -100,7 +114,7 @@ function onYouTubeIframeAPIReady() {
 			height: '390',
 			width: '640',
 			events: {
-				onStateChange: onPlayerStateChange
+				// onStateChange: onPlayerStateChange
 			}
 		}
 
@@ -110,7 +124,7 @@ function onYouTubeIframeAPIReady() {
 			height: '390',
 			width: '640',
 			events: {
-				onStateChange: onPlayerStateChange
+				// onStateChange: onPlayerStateChange
 			}
 		}
 

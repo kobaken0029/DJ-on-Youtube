@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>DJ on Youtube</title>
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -28,22 +28,18 @@
 	</div>
 </form>
 <hr>
-<ul id="playlist">
-</ul>
+<button class="btn btn-default" id="prev"><span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>&nbsp; Prev</button>
+<button class="btn btn-default" id="play">Play &nbsp;<span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+<button class="btn btn-default" id="pause">Pause &nbsp;<span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
+<button class="btn btn-default" id="next">Next &nbsp;<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span></button>
 <hr>
-	<!-- <div class="col-md-3 col-md-offset-1" id="radioButtons">
-		<label class="radio-inline">
-			<input type="radio" name="TurntableOptions" id="radio1" value="true"> <strong>Assign to Turntable 1</strong>
-		</label>
-		<label class="radio-inline">
-			<input type="radio" name="TurntableOptions" id="radio2" value="true"> <strong>Assign to Turntable 2</strong>
-		</label>
-	</div> -->
-		<button class="btn btn-default" id="prev">&lt;&lt; Prev</button>
-		<button class="btn btn-default" id="play">Play</button>
-		<button class="btn btn-default" id="pause">Pause</button>
-		<button class="btn btn-default" id="next">Next &gt;&gt;</button>
+<p>Playlist <span class="glyphicon glyphicon-list" aria-hidden="true"></span></p>
+<div class="row">
+	<ul id="playlist">
+	</ul>
+</div>
 <hr>
+<p>Search Result <span class="glyphicon glyphicon-search" aria-hidden="true"></span></p>
 <ul id="list">
 </ul>
 

@@ -13,18 +13,19 @@ li.movie {
 	padding: 10px;
 }
 
-li.movie.assigned1 {
+li.movie.on {
+	border-radius: 10px;
 	background-color: #afa;
-}
-
-li.movie.assigned2 {
-	background-color: pink;
 }
 
 li.movie.playing {
 	background-color: deeppink;
 }
 
-#radioButtons {
-	margin-top: 10px
+.assign1-button {
+	margin-right: 18px
+}
+
+.assign2-button {
+	margin-left: 18px
 }
