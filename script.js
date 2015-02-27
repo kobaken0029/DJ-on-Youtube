@@ -5,6 +5,66 @@ $(function() {
 
 	$('#q').focus();
 
+	$(function() {
+	    $( "#vertical-slider1" ).slider({
+		    orientation: "vertical",
+		    range: "min",
+		    min: 0,
+		    max: 100,
+		    value: 60,
+		    slide: function( event, ui ) {
+		    	var currentVolume = ui.value;
+		    	var holizontalValue = $('#holizontal-slider').slider("value");
+
+	    		if (holizontalValue > 100) {
+		    		currentVolume *= (200 - holizontalValue) / 100.0;
+		    	}
+	    		player1.setVolume(currentVolume);
+			}
+		});
+  });
+
+  	$(function() {
+	    $( "#vertical-slider2" ).slider({
+		    orientation: "vertical",
+		    range: "min",
+		    min: 0,
+		    max: 100,
+		    value: 60,
+		    slide: function( event, ui ) {
+		     	var currentVolume = ui.value;
+		    	var holizontalValue = $('#holizontal-slider').slider("value");
+
+	    		if (holizontalValue < 100) {
+		    		currentVolume *= holizontalValue / 100.0;
+		    	}
+	    		player2.setVolume(currentVolume);
+			}
+		});
+  });
+
+  	$(function() {
+	    $( "#holizontal-slider" ).slider({
+		    min: 0,
+		    max: 200,
+		    value: 100,
+		    slide: function( event, ui ) {
+		    	var player1Volume = $('#vertical-slider1').slider("value");
+		    	var player2Volume = $('#vertical-slider2').slider("value");
+
+		    	if (ui.value > 100) {
+		    		player1Volume *= (200 - ui.value) / 100.0;
+		    		player1.setVolume(player1Volume);
+		    	}
+		    	else {
+			    	player2Volume *= ui.value / 100.0;
+			    	player2.setVolume(player2Volume);
+		    	}
+		    	
+			}
+		});
+  });
+
 	$('#search').submit(function(){
 		var url = "https://www.googleapis.com/youtube/v3/search";
 		var options = {

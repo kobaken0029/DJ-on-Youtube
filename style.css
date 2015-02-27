@@ -11,6 +11,7 @@ ul {
 li.movie {
 	float: left;
 	padding: 10px;
+	margin: 5px;
 }
 
 li.movie.on {
@@ -28,4 +29,29 @@ li.movie.playing {
 
 .assign2-button {
 	margin-left: 18px
+}
+
+.vertical-slider {
+	height: 400px !important;
+	padding: 0;
+	margin-top: 60px;
+}
+
+#holizontal-slider {
+	margin-top: 60px;
+	margin-left: 650px;
+	width: 600px;
+	background: #ddd;
+}
+
+#player1Area {
+	padding-right: 0;
+}
+
+#player2Area {
+	padding-left: 0;
+}
+
+.glyphicon-volume-up {
+	font-size: 25px;
 }
