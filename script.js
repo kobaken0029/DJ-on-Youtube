@@ -88,7 +88,14 @@ $(function() {
 						})
 					).attr('data-video-id', item['id']['videoId']).append(
 						$('<li>').append(
-							$('<p>').append(item['snippet']['title'])
+							$('<p class="title">').append(function(){
+								var txt = item['snippet']['title'];
+								if(txt.length > 41){
+        							txt = txt.substr(0, 41);
+        							$(this).text(txt + "･･･");
+    							}
+    							else return txt;
+							})
 						)
 					)
 				);
@@ -98,7 +105,7 @@ $(function() {
 
 
 
-	$(document).on('click', '#list li', function(){
+	$(document).on('click', '#list .movie', function(){
 		var videoId = $(this).data('video-id');
 		$(this).toggleClass('on');
 
