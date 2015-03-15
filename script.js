@@ -180,6 +180,7 @@ function onYouTubeIframeAPIReady() {
 	player1 = new YT.Player('player1', {
 			height: '390',
 			width: '640',
+			autohide: '1',
 			events: {
 				// onStateChange: onPlayerStateChange
 			}
@@ -190,6 +191,7 @@ function onYouTubeIframeAPIReady() {
 	player2 = new YT.Player('player2', {
 			height: '390',
 			width: '640',
+			autohide: '1',
 			events: {
 				// onStateChange: onPlayerStateChange
 			}
